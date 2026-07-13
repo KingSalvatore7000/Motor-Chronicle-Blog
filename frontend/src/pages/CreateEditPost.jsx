@@ -15,7 +15,7 @@ export default function CreateEditPost() {
   const [content, setContent] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [imageInputMode, setImageInputMode] = useState('upload'); // 'upload' or 'url'
-  
+
   const [activeTab, setActiveTab] = useState('write'); // 'write' or 'preview'
   const [isLoading, setIsLoading] = useState(isEditMode);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -35,7 +35,7 @@ export default function CreateEditPost() {
         setError('');
         try {
           const post = await api.get(`/posts/${id}`);
-          
+
           // Verify that current user is the author
           if (post.author_id !== user.id) {
             setError('Access forbidden: You are not the author of this post.');
@@ -45,7 +45,7 @@ export default function CreateEditPost() {
           setTitle(post.title);
           setContent(post.content);
           setImageUrl(post.image_url || '');
-          
+
           // Auto-detect input mode based on loaded image type
           if (post.image_url) {
             if (post.image_url.startsWith('data:image/')) {
@@ -154,8 +154,8 @@ export default function CreateEditPost() {
       <header className="page-header animate-fade-in">
         <h1 className="page-title">{isEditMode ? 'Edit Post' : 'Create Post'}</h1>
         <p className="page-description">
-          {isEditMode 
-            ? 'Refine your draft, correct mistakes, or add updates.' 
+          {isEditMode
+            ? 'Refine your draft, correct mistakes, or add updates.'
             : 'Share your restoration builds, track day reports, or automotive stories.'}
         </p>
       </header>
@@ -313,12 +313,12 @@ export default function CreateEditPost() {
                 <img src={imageUrl} alt="Preview Cover" className="preview-cover-img" />
               </div>
             )}
-            
+
             <div className="preview-body">
               {content ? (
                 content.split('\n\n').map((paragraph, index) => {
                   if (!paragraph.trim()) return null;
-                  
+
                   if (paragraph.trim().startsWith('>')) {
                     return (
                       <blockquote key={index}>
@@ -340,8 +340,8 @@ export default function CreateEditPost() {
             </div>
 
             <div className="editor-actions">
-              <button 
-                type="button" 
+              <button
+                type="button"
                 className="btn btn-secondary"
                 onClick={() => setActiveTab('write')}
               >

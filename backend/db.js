@@ -4,7 +4,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const dbPath = path.resolve(__dirname, 'blogspot.db');
+const dbPath = process.env.DATABASE_PATH || path.resolve(__dirname, 'blogspot.db');
 
 let db = null;
 

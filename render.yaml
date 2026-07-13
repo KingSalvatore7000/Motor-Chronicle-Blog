@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: blogspot
+    env: node
+    plan: free # Change to "starter" or higher if you want to use persistent disks
+    buildCommand: npm run install-all && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true # Render will automatically generate a secure random key for JWT signing
+      
+      # Option 1 (Default): Ephemeral SQLite database.
+      # The database is stored inside the container and resets on every redeployment/restart.
+      
+      # Option 2: Persistent SQLite database (Requires "starter" plan or higher).
+      # To enable, uncomment the DATABASE_PATH env var and the disks section below:
+      # - key: DATABASE_PATH
+      #   value: /var/data/blogspot.db
+
+    # To enable persistent storage for SQLite (avoids database resets on restart):
+    # disks:
+    #   - name: blogspot-db-vol
+    #     mountPath: /var/data
+    #     sizeGB: 1
