@@ -8,6 +8,8 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
+      - key: NODE_VERSION
+        value: "20"
       - key: JWT_SECRET
         generateValue: true # Render will automatically generate a secure random key for JWT signing
       
